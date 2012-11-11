@@ -12,8 +12,10 @@ def get_summoner(region, name):
 	r = requests.get(url)
 	data = r.json
 	if data is not None:
-		
-		c = Summoner()
+		try:
+			c = Summoner.objects.get(acctId=data['acctId'])
+		except:
+			c = Summoner()
 
 		c.name=data['name']
 		c.internalName = data['internalName']
@@ -24,3 +26,4 @@ def get_summoner(region, name):
 		c.summonerId = data['summonerId']
 		c.dataVersion = data['dataVersion']
 		c.save()
+#http://stackoverflow.com/questions/377454/how-do-i-get-my-python-program-to-sleep-for-50-msec
