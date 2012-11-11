@@ -26,20 +26,15 @@ class Summoner(models.Model):
 		r = requests.get(url)
 		data = r.json
 		if data is not None:
-			try:
-				c = Summoner.objects.get(acctId=data['acctId'])
-			except:
-				c = Summoner()
-
-			c.name=data['name']
-			c.internalName = data['internalName']
-			c.acctId = data['acctId']
-			c.profileIconId = data['profileIconId']
-			c.revisionId = data['revisionId']
-			c.summonerLevel = data['summonerLevel']
-			c.summonerId = data['summonerId']
-			c.dataVersion = data['dataVersion']
-			c.save()
+			self.name=data['name']
+			self.internalName = data['internalName']
+			self.acctId = data['acctId']
+			self.profileIconId = data['profileIconId']
+			self.revisionId = data['revisionId']
+			self.summonerLevel = data['summonerLevel']
+			self.summonerId = data['summonerId']
+			self.dataVersion = data['dataVersion']
+			self.save()
 	#http://stackoverflow.com/questions/377454/how-do-i-get-my-python-program-to-sleep-for-50-msec
 
 class RankedChampionStats(models.Model):
