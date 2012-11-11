@@ -5,8 +5,9 @@ import json
 # Create your models here.
 
 class Item(models.Model):
-	name = models.CharField(max_length=200)
 	id = models.IntegerField(primary_key=True) #use the id from the api as pk so we can have clean queries later
+	name = models.CharField(max_length=200)
+	
 
 	#this method actually belongs to a manager class, but for now it can stay here.  it doesn't store in the item itself, but rather gets all items and stores.
 	def get_items(self):
