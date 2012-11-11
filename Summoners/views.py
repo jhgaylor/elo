@@ -34,3 +34,4 @@ def get_summoner(region, name):
 
 		c.save()
 #http://stackoverflow.com/questions/377454/how-do-i-get-my-python-program-to-sleep-for-50-msec
+#jake branch
