@@ -26,14 +26,18 @@ class Summoner(models.Model):
 		r = requests.get(url)
 		data = r.json
 		if data is not None:
-			self.name=data['name']
-			self.internalName = data['internalName']
-			self.acctId = data['acctId']
-			self.profileIconId = data['profileIconId']
-			self.revisionId = data['revisionId']
-			self.summonerLevel = data['summonerLevel']
-			self.summonerId = data['summonerId']
-			self.dataVersion = data['dataVersion']
+			for k, v in data.iteritems():
+				if hasAttr(self, k):
+					setAttr(self, k, v)
+
+			#self.name=data['name']
+			#self.internalName = data['internalName']
+			#self.acctId = data['acctId']
+			#self.profileIconId = data['profileIconId']
+			#self.revisionId = data['revisionId']
+			#self.summonerLevel = data['summonerLevel']
+			#self.summonerId = data['summonerId']
+			#self.dataVersion = data['dataVersion']
 			self.save()
 	#http://stackoverflow.com/questions/377454/how-do-i-get-my-python-program-to-sleep-for-50-msec
 
@@ -60,3 +64,8 @@ class RankedChampionStats(models.Model):
 	magicalDamageDealt 	= models.IntegerField()
 	damageTaken 		= models.IntegerField()
 	timeSpentDead 		= models.IntegerField()
+
+
+# class A():
+# 	summoner 			= "summoner"
+# 	championId 			= "champ id"
