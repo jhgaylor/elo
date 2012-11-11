@@ -67,7 +67,7 @@ class RankedChampionStats(models.Model):
 	def get(self):
 		if self.summoner < 1:
 			return False #if either required parameter is unavailable to us we return false
-		url = "http://elophant.com/api/v1/"+self.region+"/getRankedStats?accountId="+self.summoner.acctId+"&season=CURRENT&key="+settings.ELO_API_KEY
+		url = "http://elophant.com/api/v1/"+self.summoner.region+"/getRankedStats?accountId="+self.summoner.acctId+"&season=CURRENT&key="+settings.ELO_API_KEY
 		r = requests.get(url) #send a get request for the response
 		data = r.json #sets data to the object represented by the json response
 		if data is not None: #make sure we got a response.  The response will be none if they have no data for the request
