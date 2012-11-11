@@ -27,8 +27,8 @@ class Summoner(models.Model):
 		data = r.json
 		if data is not None:
 			for k, v in data.iteritems():
-				if hasAttr(self, k):
-					setAttr(self, k, v)
+				if hasattr(self, k):
+					setattr(self, k, v)
 
 			#self.name=data['name']
 			#self.internalName = data['internalName']
