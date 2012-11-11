@@ -10,9 +10,7 @@ SAMPLE_NAMES = ["redrangerftw","Vephoma","Dergonborn","AntiSlash","devilboy945",
 
 def get_summoner(region, name):
 
-	url = "http://elophant.com/api/v1/" + region + 
-	      "/getSummonerByName?summonerName=" + urllib.quote(name) + 
-              "&key=" + API_KEY
+	url = "http://elophant.com/api/v1/" + region + "/getSummonerByName?summonerName=" + urllib.quote(name) +  "&key=" + API_KEY
 
 	r = requests.get(url)
 	data = r.json
