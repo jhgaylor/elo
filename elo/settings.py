@@ -2,7 +2,7 @@
 #checks
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
+ELO_API_KEY = "ormTSJxcEMPj9kJA0p3B"
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )

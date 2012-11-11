@@ -4,4 +4,4 @@ from django.db import models
 
 class Item(models.Model):
 	name = models.CharField(max_length=200)
-	epid = models.IntegerField(primary_key=True)
+	epid = models.IntegerField(primary_key=True) #use the id from the api as pk so we can have clean queries later
