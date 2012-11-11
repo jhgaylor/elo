@@ -9,7 +9,7 @@ class Item(models.Model):
 	epid = models.IntegerField(primary_key=True) #use the id from the api as pk so we can have clean queries later
 
 	#this method actually belongs to a manager class, but for now it can stay here.  it doesn't store in the item itself, but rather gets all items and stores.
-	def get_items():
+	def get_items(self):
 		url = "http://elophant.com/api/v1/items?key="+settings.ELO_API_KEY
 		r = requests.get(url)
 		data = r.json
