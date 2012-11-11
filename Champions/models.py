@@ -4,8 +4,8 @@ import requests
 import json
 # Create your models here.
 class Champion(models.Model):
-	name = models.CharField(max_length=200)
 	id = models.IntegerField(primary_key=True) #use the id from the api as pk so we can have clean queries later
+	name = models.CharField(max_length=200)
 
 	#this method actually belongs to a manager class, but for now it can stay here.  it doesn't store in the champion itself, but rather gets all champions and stores.
 	def get_champions(self):
@@ -14,7 +14,6 @@ class Champion(models.Model):
 		data = r.json
 		for each in data:
 			c = Champion()
-			print each
 			for k, v in each.iteritems(): #iterate over the response json as key value pairs
 				if hasattr(c, k): #check if the object has an attribute with the same name as the key
 					setattr(c, k, v) #if it does, set the value of the attribute to the value of key
