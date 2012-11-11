@@ -14,6 +14,8 @@ class Champion(models.Model):
 		data = r.json
 		for each in data:
 			c = Champion()
-			c.name=each['name']
-			c.epid = each['id']
-			c.save()
+			for k, v in each.iteritems(): #iterate over the response json as key value pairs
+				if hasattr(self, k): #check if the object has an attribute with the same name as the key
+					setattr(self, k, v) #if it does, set the value of the attribute to the value of key
+			c.save() #save the object
+			

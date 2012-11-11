@@ -18,27 +18,20 @@ class Summoner(models.Model):
 	summonerId 		= models.IntegerField()
 	dataVersion 	= models.IntegerField()
 
-
-
 	#requires self.name and self.region to be set.
 	def get(self):
+		if (self.name == "") or (self.region == ""):
+			return False #if either required parameter is unavailable to us we return false
 		url = "http://elophant.com/api/v1/"+self.region+"/getSummonerByName?summonerName="+urllib.quote(self.name)+"&key="+settings.ELO_API_KEY
-		r = requests.get(url)
-		data = r.json
-		if data is not None:
-			for k, v in data.iteritems():
-				if hasattr(self, k):
-					setattr(self, k, v)
+		r = requests.get(url) #send a get request for the response
+		data = r.json #sets data to the object represented by the json response
+		if data is not None: #make sure we got a response.  The response will be none if they have no data for the request
+			for k, v in data.iteritems(): #iterate over the response json as key value pairs
+				if hasattr(self, k): #check if the object has an attribute with the same name as the key
+					setattr(self, k, v) #if it does, set the value of the attribute to the value of key
+			self.save() #save the object
 
-			#self.name=data['name']
-			#self.internalName = data['internalName']
-			#self.acctId = data['acctId']
-			#self.profileIconId = data['profileIconId']
-			#self.revisionId = data['revisionId']
-			#self.summonerLevel = data['summonerLevel']
-			#self.summonerId = data['summonerId']
-			#self.dataVersion = data['dataVersion']
-			self.save()
+
 	#http://stackoverflow.com/questions/377454/how-do-i-get-my-python-program-to-sleep-for-50-msec
 
 class RankedChampionStats(models.Model):
@@ -64,8 +57,3 @@ class RankedChampionStats(models.Model):
 	magicalDamageDealt 	= models.IntegerField()
 	damageTaken 		= models.IntegerField()
 	timeSpentDead 		= models.IntegerField()
-
-
-# class A():
-# 	summoner 			= "summoner"
-# 	championId 			= "champ id"
