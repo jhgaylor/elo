@@ -7,15 +7,15 @@ def get_summoner(region, name):
 	url = "http://elophant.com/api/v1/"+region+"/getSummonerByName?summonerName="+name+"&key="+API_KEY
 	r = requests.get(url)
 	data = r.json
-	for each in data:
-		c = Summoner()
+	
+	c = Summoner()
 
-		c.name=each['name']
-		c.internalName = each['internalName']
-		c.acctId = each['acctId']
-		c.profileIconId = each['profileIconId']
-		c.revisionId = each['revisionId']
-		c.summonerLevel = each['summonerLevel']
-		c.summonerId = each['summonerId']
-		c.dataVersion = each['dataVersion']
-		c.save()
+	c.name=data['name']
+	c.internalName = data['internalName']
+	c.acctId = data['acctId']
+	c.profileIconId = data['profileIconId']
+	c.revisionId = data['revisionId']
+	c.summonerLevel = data['summonerLevel']
+	c.summonerId = data['summonerId']
+	c.dataVersion = data['dataVersion']
+	c.save()
