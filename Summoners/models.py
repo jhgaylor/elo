@@ -71,7 +71,8 @@ class RankedChampionStats(models.Model):
 		r = requests.get(url) #send a get request for the response
 		data = r.json #sets data to the object represented by the json response
 		if data is not None: #make sure we got a response.  The response will be none if they have no data for the request
-			for k, v in data.iteritems(): #iterate over the response json as key value pairs
-				if hasattr(self, k): #check if the object has an attribute with the same name as the key
-					setattr(self, k, v) #if it does, set the value of the attribute to the value of key
-			self.save() #save the object
+			for each in data:
+				for k, v in each.iteritems(): #iterate over the response json as key value pairs
+					if hasattr(self, k): #check if the object has an attribute with the same name as the key
+						setattr(self, k, v) #if it does, set the value of the attribute to the value of key
+				self.save() #save the object
