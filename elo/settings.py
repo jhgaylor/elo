@@ -1,5 +1,5 @@
 # Django settings for elo project.
-
+#checks
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
