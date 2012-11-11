@@ -5,7 +5,7 @@ import json
 # Create your models here.
 class Champion(models.Model):
 	name = models.CharField(max_length=200)
-	epid = models.IntegerField(primary_key=True) #use the id from the api as pk so we can have clean queries later
+	id = models.IntegerField(primary_key=True) #use the id from the api as pk so we can have clean queries later
 
 	#this method actually belongs to a manager class, but for now it can stay here.  it doesn't store in the champion itself, but rather gets all champions and stores.
 	def get_champions(self):
