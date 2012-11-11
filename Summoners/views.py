@@ -27,4 +27,3 @@ def get_summoner(region, name):
 		c.dataVersion = data['dataVersion']
 		c.save()
 #http://stackoverflow.com/questions/377454/how-do-i-get-my-python-program-to-sleep-for-50-msec
-#test
