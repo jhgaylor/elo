@@ -18,9 +18,9 @@ class SetupTest(TestCase):
 			s = Summoner()
 			s.name = n['name']
 			s.region = n['region']
-			s.save()
+			s.get()
 			sleep(1)
-		
+
 
 # class SimpleTest(TestCase):
 #     def test_basic_addition(self):
