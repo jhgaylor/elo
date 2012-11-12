@@ -76,9 +76,3 @@ class RankedChampionStats(models.Model):
 	MagicalDamageDealt 	= models.IntegerField()
 	DamageTaken 		= models.IntegerField()
 	TimeSpentDead 		= models.IntegerField()
-
-	#requires self.summoner to be set.  
-	def get(self):
-		if self.summoner < 1:
-			return False #if either required parameter is unavailable to us we return false
-
