@@ -37,8 +37,11 @@ class Summoner(models.Model):
 		data = r.json #sets data to the object represented by the json response
 		if data is not None: #make sure we got a response.  The response will be none if they have no data for the request
 			for each in data:
-				stat = RankedChampionStats()
-				stat.summoner = self
+				try:
+					stat = RankedChampionStats.objects.get(ChampionId=each['ChampionId'], summoner=self)
+				except:
+					stat = RankedChampionStats()
+					stat.summoner = self
 				for k, v in each.iteritems(): #iterate over the response json as key value pairs
 					if k == 'ChampionId':
 						setattr(stat, k, Champion.objects.get(pk=v))
