@@ -74,5 +74,8 @@ class RankedChampionStats(models.Model):
 			for each in data:
 				for k, v in each.iteritems(): #iterate over the response json as key value pairs
 					if hasattr(self, k): #check if the object has an attribute with the same name as the key
-						setattr(self, k, v) #if it does, set the value of the attribute to the value of key
+						if k == 'ChampionId':
+							setattr(self, k, Champion.objects.get(pk=v))
+						else:
+							setattr(self, k, v) #if it does, set the value of the attribute to the value of key
 				self.save() #save the object
