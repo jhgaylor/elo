@@ -41,7 +41,7 @@ class Summoner(models.Model):
 
 class RankedChampionStats(models.Model):
 	summoner 			= models.ForeignKey(Summoner)
-	ChampionId 			= models.ForeignKey(Champion)
+	ChampionId 			= models.ForeignKey(Champion, db_column="ChampionId")
 	Wins 				= models.IntegerField()
 	Losses 				= models.IntegerField()
 	GamesPlayed			= models.IntegerField()
