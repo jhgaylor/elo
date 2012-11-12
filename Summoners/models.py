@@ -73,9 +73,9 @@ class RankedChampionStats(models.Model):
 		if data is not None: #make sure we got a response.  The response will be none if they have no data for the request
 			for each in data:
 				for k, v in each.iteritems(): #iterate over the response json as key value pairs
-					if hasattr(self, k): #check if the object has an attribute with the same name as the key
-						if k == 'ChampionId':
-							setattr(self, k, Champion.objects.get(pk=v))
-						else:
+					if k == 'ChampionId':
+						setattr(self, k, Champion.objects.get(pk=v))
+					else:
+						if hasattr(self, k): #check if the object has an attribute with the same name as the key
 							setattr(self, k, v) #if it does, set the value of the attribute to the value of key
 				self.save() #save the object
