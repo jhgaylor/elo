@@ -32,9 +32,20 @@ class Summoner(models.Model):
 			self.save() #save the object
 
 	def get_ranked_stats(self):
-		stats = RankedChampionStats()
-		stats.summoner = self
-		stats.get()
+		url = "http://elophant.com/api/v1/"+self.region+"/getRankedStats?accountId="+str(self.acctId)+"&season=CURRENT&key="+settings.ELO_API_KEY
+		r = requests.get(url) #send a get request for the response
+		data = r.json #sets data to the object represented by the json response
+		if data is not None: #make sure we got a response.  The response will be none if they have no data for the request
+			for each in data:
+				stat = RankedChampionStats()
+				stat.summoner = self
+				for k, v in each.iteritems(): #iterate over the response json as key value pairs
+					if k == 'ChampionId':
+						setattr(stat, k, Champion.objects.get(pk=v))
+					else:
+						if hasattr(stat, k): #check if the object has an attribute with the same name as the key
+							setattr(stat, k, v) #if it does, set the value of the attribute to the value of key
+				stat.save() #save the object
 
 
 	#http://stackoverflow.com/questions/377454/how-do-i-get-my-python-program-to-sleep-for-50-msec
@@ -63,19 +74,8 @@ class RankedChampionStats(models.Model):
 	DamageTaken 		= models.IntegerField()
 	TimeSpentDead 		= models.IntegerField()
 
-	#requires self.summoner to be set.
+	#requires self.summoner to be set.  
 	def get(self):
 		if self.summoner < 1:
 			return False #if either required parameter is unavailable to us we return false
-		url = "http://elophant.com/api/v1/"+self.summoner.region+"/getRankedStats?accountId="+str(self.summoner.acctId)+"&season=CURRENT&key="+settings.ELO_API_KEY
-		r = requests.get(url) #send a get request for the response
-		data = r.json #sets data to the object represented by the json response
-		if data is not None: #make sure we got a response.  The response will be none if they have no data for the request
-			for each in data:
-				for k, v in each.iteritems(): #iterate over the response json as key value pairs
-					if k == 'ChampionId':
-						setattr(self, k, Champion.objects.get(pk=v))
-					else:
-						if hasattr(self, k): #check if the object has an attribute with the same name as the key
-							setattr(self, k, v) #if it does, set the value of the attribute to the value of key
-				self.save() #save the object
+
