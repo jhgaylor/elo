@@ -1,0 +1,10 @@
+Betting on tournaments:
+	winner of each round
+	overall winner
+
+Betting on season placing:
+	who will be in the top 5, 10, 15
+
+
+backend:
+	machine learn: who will win a game given a set of players and their champions

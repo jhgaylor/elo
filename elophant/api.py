@@ -18,6 +18,7 @@ class api():
 	def summoner_by_name(self, name, region):
 		return self.elo.v1(region).getSummonerByName.get(summonerName=name, key=self.key)
 
+	#usage stats for every champ played in ranked games
 	def get_ranked_stats(self, id, region, season="CURRENT"):
 		return self.elo.v1(region).getRankedStats.get(accountId=id, season=season, key=self.key)
 
@@ -37,9 +38,10 @@ class api():
 		return self.elo.v1(region).getRecentGames.get(accountId=id, key=self.key)
 
 	#this one is different.  ill do it later
-	# def get_summoner_names(self, id, region):
-	# 	return self.elo.v1(region).getRecentGames.get(accountId=id, key=self.key)
+	def get_summoner_names(self, ids, region):
+		return self.elo.v1(region).getRecentGames.get(summonerIds=",".join(ids), key=self.key)
 
+	#stats for ranked and unranked game modes
 	def get_player_stats(self, id, region, season="CURRENT"):
 		return self.elo.v1(region).getPlayerStats.get(accountId=id, season=season, key=self.key)
 
@@ -55,7 +57,7 @@ class api():
 
 	def get_team_ranked_stats(self, id, region):
 		return self.elo.v1(region).getTeamRankedStats.get(teamId=id, key=self.key)
-		
+
 	#not working
 	def get_summoner_team_info(self, id, region):
 		print "warning.  probably doesn't work.  elophant.api.api.get_summoner_team_info"
@@ -66,10 +68,11 @@ class api():
 a = api(key="ormTSJxcEMPj9kJA0p3B")
 # print a.champions()
 # print a.items()
+print a.status()
 # print a.get_player_stats('76833', 'euw')
 #print a.get_team_by_id('TEAM-e4936d7b-b80e-4367-a76c-5ccf7388c995', 'na')
-print a.get_team_by_tag_or_name('tsm', 'na')
-
+#print a.get_team_by_tag_or_name('tsm', 'na')
+#print a.get_summoner_names(['76833'])
 #print a.get_summoner_team_info('mercenaryRPG', 'na')
 
 #need to install slumber, requests
