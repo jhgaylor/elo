@@ -1,1 +1,6 @@
-This is the readme.
+E-sports betting
+================
+
+Requirements
+------------
+*Slumber (requests)
